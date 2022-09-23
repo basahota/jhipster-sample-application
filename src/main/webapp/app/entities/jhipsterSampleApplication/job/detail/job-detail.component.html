@@ -1,0 +1,55 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="job">
+      <h2 data-cy="jobDetailsHeading">
+        <span jhiTranslate="jhipsterSampleApplicationApp.jhipsterSampleApplicationJob.detail.title">Job</span>
+      </h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ job.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipsterSampleApplicationApp.jhipsterSampleApplicationJob.jobTitle">Job Title</span></dt>
+        <dd>
+          <span>{{ job.jobTitle }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipsterSampleApplicationApp.jhipsterSampleApplicationJob.minSalary">Min Salary</span></dt>
+        <dd>
+          <span>{{ job.minSalary }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipsterSampleApplicationApp.jhipsterSampleApplicationJob.maxSalary">Max Salary</span></dt>
+        <dd>
+          <span>{{ job.maxSalary }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipsterSampleApplicationApp.jhipsterSampleApplicationJob.task">Task</span></dt>
+        <dd>
+          <span *ngFor="let task of job.tasks; let last = last">
+            <a [routerLink]="['/task', task.id, 'view']">{{ task.title }}</a
+            >{{ last ? '' : ', ' }}
+          </span>
+        </dd>
+        <dt><span jhiTranslate="jhipsterSampleApplicationApp.jhipsterSampleApplicationJob.employee">Employee</span></dt>
+        <dd>
+          <div *ngIf="job.employee">
+            <a [routerLink]="['/employee', job.employee.id, 'view']">{{ job.employee.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/jhipstersampleapplication/job', job.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>
